@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ElectIQ — India Election Education Assistant</title>
+  <meta name="description" content="ElectIQ: AI-powered guide to India's election process, voter stats, parties, candidates, CCTV transparency, and civic education."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<canvas id="particleCanvas"></canvas>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo"><span class="logo-icon">🗳️</span><span class="logo-text">Elect<span class="accent">IQ</span></span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#how-it-works" class="nav-link">Process</a></li>
+      <li><a href="#voter-stats" class="nav-link">Voter Stats</a></li>
+      <li><a href="#parties" class="nav-link">Parties</a></li>
+      <li><a href="#candidates" class="nav-link">Candidates</a></li>
+      <li><a href="#cctv" class="nav-link">Live Booths</a></li>
+      <li><a href="#quiz" class="nav-link">Quiz</a></li>
+      <li><a href="#assistant" class="nav-link btn-nav">AI Assistant</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🏆 Hack2Skill 2026 — Civic Tech Initiative</div>
+    <h1 class="hero-title">Understand Every Vote.<br/><span class="gradient-text">Master Every Election.</span></h1>
+    <p class="hero-sub">ElectIQ is India's AI-powered civic guide — explore election timelines, study parties &amp; candidates, monitor live polling booths, and become a truly informed voter.</p>
+    <div class="hero-cta-group">
+      <a href="#assistant" class="btn-primary">Chat with ElectIQ 🤖</a>
+      <a href="#how-it-works" class="btn-outline">Explore Process ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card"><span class="stat-num">96.8Cr</span><span class="stat-label">Registered Voters</span></div>
+      <div class="stat-card"><span class="stat-num">543</span><span class="stat-label">Constituencies</span></div>
+      <div class="stat-card"><span class="stat-num">2300+</span><span class="stat-label">Parties Registered</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="ballot-3d">
+      <div class="ballot-face">
+        <div class="ballot-header">🗳️ OFFICIAL BALLOT</div>
+        <div class="ballot-option selected"><span class="radio-dot filled"></span>Candidate A</div>
+        <div class="ballot-option"><span class="radio-dot"></span>Candidate B</div>
+        <div class="ballot-option"><span class="radio-dot"></span>Candidate C</div>
+        <div class="ballot-stamp">✓ VOTE CAST</div>
+      </div>
+    </div>
+    <div class="orbit-ring ring1"><div class="orbit-dot"></div></div>
+    <div class="orbit-ring ring2"><div class="orbit-dot accent-dot"></div></div>
+    <!-- FUNCTIONAL HERO BADGES -->
+    <a href="#voter-stats" class="floating-badge badge1" id="heroBadge1" title="See voter registration statistics">📋 Registration</a>
+    <a href="#parties" class="floating-badge badge2" id="heroBadge2" title="See nomination & political parties">🏛️ Nomination</a>
+    <a href="#cctv" class="floating-badge badge3" id="heroBadge3" title="View live vote counting feed">📊 Count</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-header">
+    <span class="section-tag">Process Overview</span>
+    <h2>How Elections <span class="gradient-text">Work</span></h2>
+    <p>A complete breakdown of every stage — from announcement to oath-taking.</p>
+  </div>
+  <div class="steps-grid" id="stepsGrid"></div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-header">
+    <span class="section-tag">Interactive Timeline</span>
+    <h2>Election <span class="gradient-text">Timeline</span></h2>
+    <p>Click each phase to explore what happens and why it matters.</p>
+  </div>
+  <div class="timeline-container">
+    <div class="timeline-track" id="timelineTrack"></div>
+    <div class="timeline-detail-panel" id="timelinePanel">
+      <div class="panel-placeholder"><span>👆</span><p>Click any phase above to see detailed information</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VOTER STATS -->
+<section id="voter-stats">
+  <div class="section-header">
+    <span class="section-tag">Live Statistics</span>
+    <h2>Voter Registration <span class="gradient-text">Dashboard</span></h2>
+    <p>Real-time snapshot of India's electorate — the world's largest democracy.</p>
+  </div>
+  <div class="stats-dashboard">
+    <div class="stat-big-card" id="totalVoters">
+      <div class="stat-icon">👥</div>
+      <div class="stat-counter" data-target="968000000">0</div>
+      <div class="stat-big-label">Total Registered Voters</div>
+      <div class="stat-sub">As of Lok Sabha 2024 General Election</div>
+    </div>
+    <div class="stat-big-card" id="womenVoters">
+      <div class="stat-icon">👩</div>
+      <div class="stat-counter" data-target="471000000">0</div>
+      <div class="stat-big-label">Women Voters</div>
+      <div class="stat-sub">48.67% of total electorate</div>
+    </div>
+    <div class="stat-big-card" id="youthVoters">
+      <div class="stat-icon">🧑</div>
+      <div class="stat-counter" data-target="20000000">0</div>
+      <div class="stat-big-label">First-Time Voters (18–19)</div>
+      <div class="stat-sub">Newly enrolled for 2024</div>
+    </div>
+    <div class="stat-big-card" id="boothCount">
+      <div class="stat-icon">🏫</div>
+      <div class="stat-counter" data-target="1048000">0</div>
+      <div class="stat-big-label">Polling Booths Nationwide</div>
+      <div class="stat-sub">Across all 543 constituencies</div>
+    </div>
+  </div>
+  <div class="voter-breakdown">
+    <div class="breakdown-card">
+      <h3>📊 State-wise Registration Snapshot</h3>
+      <div class="bar-chart" id="stateBarChart"></div>
+    </div>
+    <div class="breakdown-card">
+      <h3>🗺️ Voter Category Distribution</h3>
+      <div class="donut-wrapper">
+        <canvas id="donutChart" width="220" height="220"></canvas>
+        <div class="donut-legend" id="donutLegend"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLITICAL PARTIES -->
+<section id="parties">
+  <div class="section-header">
+    <span class="section-tag">Constituted Parties</span>
+    <h2>Political Parties <span class="gradient-text">& Alliances</span></h2>
+    <p>Currently constituted national and state parties contesting elections in India.</p>
+  </div>
+  <div class="alliance-tabs">
+    <button class="alliance-tab active" data-alliance="all" id="tabAll">All Parties</button>
+    <button class="alliance-tab" data-alliance="nda" id="tabNDA">🟠 NDA Alliance</button>
+    <button class="alliance-tab" data-alliance="india" id="tabINDIA">✊ INDIA Alliance</button>
+    <button class="alliance-tab" data-alliance="other" id="tabOther">🔵 Regional/Others</button>
+  </div>
+  <div class="parties-grid" id="partiesGrid"></div>
+</section>
+
+<!-- CANDIDATES -->
+<section id="candidates">
+  <div class="section-header">
+    <span class="section-tag">Constituency Watch</span>
+    <h2>Who Stands <span class="gradient-text">Where</span></h2>
+    <p>Explore key candidates contesting from major constituencies across India.</p>
+  </div>
+  <div class="candidate-search-bar">
+    <input type="text" id="candidateSearch" placeholder="🔍  Search constituency or candidate name…"/>
+    <select id="stateFilter">
+      <option value="all">All States</option>
+    </select>
+  </div>
+  <div class="candidates-grid" id="candidatesGrid"></div>
+</section>
+
+<!-- KEY CONCEPTS -->
+<section id="concepts">
+  <div class="section-header">
+    <span class="section-tag">Civic Literacy</span>
+    <h2>Key Election <span class="gradient-text">Concepts</span></h2>
+    <p>Essential terms and ideas every voter should know.</p>
+  </div>
+  <div class="concepts-grid" id="conceptsGrid"></div>
+</section>
+
+<!-- CCTV SURVEILLANCE -->
+<section id="cctv">
+  <div class="section-header">
+    <span class="section-tag">100% Transparency</span>
+    <h2>Live Polling Booth <span class="gradient-text">Surveillance</span></h2>
+    <p>Real-time CCTV monitoring of polling stations — ensuring free and fair elections.</p>
+  </div>
+  <div class="cctv-wrapper">
+    <div class="cctv-grid" id="cctvGrid"></div>
+    <div class="cctv-sidebar">
+      <div class="surveillance-status">
+        <h3>🛡️ Surveillance Status</h3>
+        <div class="status-items" id="statusItems"></div>
+      </div>
+      <div class="cctv-log">
+        <h3>📋 Activity Log</h3>
+        <div class="log-entries" id="logEntries"></div>
+      </div>
+    </div>
+  </div>
+  <div class="transparency-features">
+    <div class="tf-card"><div class="tf-icon">📹</div><h4>24/7 CCTV Coverage</h4><p>Every polling booth covered by minimum 2 cameras monitored by Election Commission observers.</p></div>
+    <div class="tf-card"><div class="tf-icon">🔒</div><h4>Sealed EVM Storage</h4><p>EVMs stored in strong rooms under triple-lock with CCTV and armed security post-polling.</p></div>
+    <div class="tf-card"><div class="tf-icon">👁️</div><h4>Observer Network</h4><p>IAS officers deployed as Election Observers in every constituency for independent oversight.</p></div>
+    <div class="tf-card"><div class="tf-icon">📡</div><h4>Control Room Monitoring</h4><p>State-level control rooms with live feeds from all booths, connected to the ECI headquarters.</p></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="section-header">
+    <span class="section-tag">Test Your Knowledge</span>
+    <h2>Civic <span class="gradient-text">Quiz</span></h2>
+    <p>12 questions covering the complete election process. How many can you get right?</p>
+  </div>
+  <div class="quiz-container">
+    <div class="quiz-meta-bar">
+      <span id="quizQLabel">Question 1 of 12</span>
+      <span id="quizScoreLabel">Score: 0</span>
+    </div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+    <div class="quiz-card" id="quizCard"></div>
+    <div class="quiz-score-panel hidden" id="quizScorePanel"></div>
+  </div>
+</section>
+
+<!-- AI ASSISTANT -->
+<section id="assistant">
+  <div class="section-header">
+    <span class="section-tag">AI-Powered Help</span>
+    <h2>Chat with <span class="gradient-text">ElectIQ</span></h2>
+    <p>Ask anything about elections, voting, or civic rights — get instant expert answers.</p>
+  </div>
+  <div class="chat-wrapper">
+    <div class="chat-sidebar">
+      <div class="chat-bot-profile">
+        <div class="bot-avatar-ring"><div class="bot-avatar">🤖</div></div>
+        <h3>ElectIQ</h3><p>Election Education AI</p>
+        <div class="bot-status"><span class="status-dot"></span>Online &amp; Ready</div>
+      </div>
+      <div class="suggested-topics">
+        <h4>Quick Topics</h4>
+        <div class="topic-chips" id="topicChips"></div>
+      </div>
+    </div>
+    <div class="chat-main">
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input-bar">
+        <input type="text" id="chatInput" placeholder="Ask about elections, EVM, NOTA, candidacy…" autocomplete="off"/>
+        <button id="chatSend" class="send-btn" aria-label="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:10px"><span class="logo-icon">🗳️</span><span class="logo-text">Elect<span class="accent">IQ</span></span></div>
+      <p>Empowering India's 968 million voters through civic education and transparent democracy.</p>
+    </div>
+    <div class="footer-links"><h4>Explore</h4>
+      <a href="#how-it-works">Election Process</a><a href="#voter-stats">Voter Stats</a>
+      <a href="#parties">Political Parties</a><a href="#candidates">Candidates</a>
+      <a href="#cctv">Live Booths</a><a href="#quiz">Civic Quiz</a>
+    </div>
+    <div class="footer-links"><h4>Resources</h4>
+      <a href="https://eci.gov.in" target="_blank">Election Commission of India</a>
+      <a href="https://voters.eci.gov.in" target="_blank">Voter Registration Portal</a>
+      <a href="#assistant">AI Assistant</a>
+    </div>
+    <div class="footer-badge">
+      <span>Built for</span><strong>Hack2Skill Hackathon 2026</strong><span>🏆 Civic Tech Track</span>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 ElectIQ — Civic Education Platform. Built with ❤️ for Democracy &amp; Transparency.</p></div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

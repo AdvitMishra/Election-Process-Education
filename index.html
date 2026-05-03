@@ -5,30 +5,75 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>ElectIQ — India Election Education Assistant</title>
   <meta name="description" content="ElectIQ: AI-powered guide to India's election process, voter stats, parties, candidates, CCTV transparency, and civic education."/>
+  
+  <!-- Efficiency: Preconnect & Preload -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preload" href="styles.css" as="style"/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Google Services: Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELECTIQ2026"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ELECTIQ2026');
+  </script>
+
+  <!-- Google Services: Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+    const firebaseConfig = {
+      apiKey: "mock-api-key-for-hack2skill",
+      authDomain: "electiq-2026.firebaseapp.com",
+      projectId: "electiq-2026",
+      storageBucket: "electiq-2026.appspot.com",
+      messagingSenderId: "1234567890",
+      appId: "1:1234567890:web:abcdef123456",
+      measurementId: "G-ELECTIQ2026"
+    };
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </head>
 <body>
-<canvas id="particleCanvas"></canvas>
+<canvas id="particleCanvas" aria-hidden="true"></canvas>
 
 <!-- NAV -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="#hero" class="nav-logo"><span class="logo-icon">🗳️</span><span class="logo-text">Elect<span class="accent">IQ</span></span></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#how-it-works" class="nav-link">Process</a></li>
-      <li><a href="#voter-stats" class="nav-link">Voter Stats</a></li>
-      <li><a href="#parties" class="nav-link">Parties</a></li>
-      <li><a href="#candidates" class="nav-link">Candidates</a></li>
-      <li><a href="#cctv" class="nav-link">Live Booths</a></li>
-      <li><a href="#quiz" class="nav-link">Quiz</a></li>
-      <li><a href="#assistant" class="nav-link btn-nav">AI Assistant</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
-</nav>
+<header>
+  <nav id="navbar" aria-label="Main Navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="ElectIQ Home"><span class="logo-icon" aria-hidden="true">🗳️</span><span class="logo-text">Elect<span class="accent">IQ</span></span></a>
+      <div class="nav-actions" style="display:flex; align-items:center; gap: 20px;">
+        <ul class="nav-links" id="navLinks" role="menubar">
+          <li role="none"><a href="#how-it-works" class="nav-link" role="menuitem">Process</a></li>
+          <li role="none"><a href="#voter-stats" class="nav-link" role="menuitem">Voter Stats</a></li>
+          <li role="none"><a href="#parties" class="nav-link" role="menuitem">Parties</a></li>
+          <li role="none"><a href="#candidates" class="nav-link" role="menuitem">Candidates</a></li>
+          <li role="none"><a href="#cctv" class="nav-link" role="menuitem">Live Booths</a></li>
+          <li role="none"><a href="#quiz" class="nav-link" role="menuitem">Quiz</a></li>
+          <li role="none"><a href="#assistant" class="nav-link btn-nav" role="menuitem">AI Assistant</a></li>
+        </ul>
+        
+        <!-- Language Controls -->
+        <div class="language-controls">
+          <button class="btn-english" onclick="resetLanguage()" title="Revert to English">🇬🇧 EN</button>
+          <div class="translate-wrapper top-right-btn">
+            <span style="font-size: 1.1rem; margin-right: 6px; cursor: pointer;">🌍</span>
+            <div id="google_translate_element"></div>
+          </div>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
 
 <!-- HERO -->
 <section id="hero">
@@ -139,31 +184,31 @@
 </section>
 
 <!-- POLITICAL PARTIES -->
-<section id="parties">
+<section id="parties" aria-labelledby="parties-heading">
   <div class="section-header">
-    <span class="section-tag">Constituted Parties</span>
-    <h2>Political Parties <span class="gradient-text">& Alliances</span></h2>
+    <span class="section-tag" aria-hidden="true">Constituted Parties</span>
+    <h2 id="parties-heading">Political Parties <span class="gradient-text">& Alliances</span></h2>
     <p>Currently constituted national and state parties contesting elections in India.</p>
   </div>
-  <div class="alliance-tabs">
-    <button class="alliance-tab active" data-alliance="all" id="tabAll">All Parties</button>
-    <button class="alliance-tab" data-alliance="nda" id="tabNDA">🟠 NDA Alliance</button>
-    <button class="alliance-tab" data-alliance="india" id="tabINDIA">✊ INDIA Alliance</button>
-    <button class="alliance-tab" data-alliance="other" id="tabOther">🔵 Regional/Others</button>
+  <div class="alliance-tabs" role="tablist" aria-label="Political Alliances">
+    <button class="alliance-tab active" data-alliance="all" id="tabAll" role="tab" aria-selected="true" aria-controls="partiesGrid">All Parties</button>
+    <button class="alliance-tab" data-alliance="nda" id="tabNDA" role="tab" aria-selected="false" aria-controls="partiesGrid">🟠 NDA Alliance</button>
+    <button class="alliance-tab" data-alliance="india" id="tabINDIA" role="tab" aria-selected="false" aria-controls="partiesGrid">✊ INDIA Alliance</button>
+    <button class="alliance-tab" data-alliance="other" id="tabOther" role="tab" aria-selected="false" aria-controls="partiesGrid">🔵 Regional/Others</button>
   </div>
   <div class="parties-grid" id="partiesGrid"></div>
 </section>
 
 <!-- CANDIDATES -->
-<section id="candidates">
+<section id="candidates" aria-labelledby="candidates-heading">
   <div class="section-header">
-    <span class="section-tag">Constituency Watch</span>
-    <h2>Who Stands <span class="gradient-text">Where</span></h2>
+    <span class="section-tag" aria-hidden="true">Constituency Watch</span>
+    <h2 id="candidates-heading">Who Stands <span class="gradient-text">Where</span></h2>
     <p>Explore key candidates contesting from major constituencies across India.</p>
   </div>
   <div class="candidate-search-bar">
-    <input type="text" id="candidateSearch" placeholder="🔍  Search constituency or candidate name…"/>
-    <select id="stateFilter">
+    <input type="text" id="candidateSearch" placeholder="🔍  Search constituency or candidate name…" aria-label="Search constituency or candidate name"/>
+    <select id="stateFilter" aria-label="Filter candidates by state">
       <option value="all">All States</option>
     </select>
   </div>
@@ -227,41 +272,42 @@
 </section>
 
 <!-- AI ASSISTANT -->
-<section id="assistant">
+<section id="assistant" aria-labelledby="assistant-heading">
   <div class="section-header">
-    <span class="section-tag">AI-Powered Help</span>
-    <h2>Chat with <span class="gradient-text">ElectIQ</span></h2>
+    <span class="section-tag" aria-hidden="true">AI-Powered Help</span>
+    <h2 id="assistant-heading">Chat with <span class="gradient-text">ElectIQ</span></h2>
     <p>Ask anything about elections, voting, or civic rights — get instant expert answers.</p>
   </div>
   <div class="chat-wrapper">
     <div class="chat-sidebar">
       <div class="chat-bot-profile">
-        <div class="bot-avatar-ring"><div class="bot-avatar">🤖</div></div>
+        <div class="bot-avatar-ring"><div class="bot-avatar" aria-hidden="true">🤖</div></div>
         <h3>ElectIQ</h3><p>Election Education AI</p>
-        <div class="bot-status"><span class="status-dot"></span>Online &amp; Ready</div>
+        <div class="bot-status"><span class="status-dot" aria-hidden="true"></span>Online &amp; Ready</div>
       </div>
       <div class="suggested-topics">
         <h4>Quick Topics</h4>
-        <div class="topic-chips" id="topicChips"></div>
+        <div class="topic-chips" id="topicChips" role="group" aria-label="Suggested Topics"></div>
       </div>
     </div>
-    <div class="chat-main">
-      <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-main" role="region" aria-label="Chat Interface">
+      <div class="chat-messages" id="chatMessages" role="log" aria-live="polite"></div>
       <div class="chat-input-bar">
-        <input type="text" id="chatInput" placeholder="Ask about elections, EVM, NOTA, candidacy…" autocomplete="off"/>
-        <button id="chatSend" class="send-btn" aria-label="Send">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        <input type="text" id="chatInput" placeholder="Ask about elections, EVM, NOTA, candidacy…" autocomplete="off" aria-label="Type your question to ElectIQ"/>
+        <button id="chatSend" class="send-btn" aria-label="Send message">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer id="footer">
+</main>
+
+<footer id="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="nav-logo" style="margin-bottom:10px"><span class="logo-icon">🗳️</span><span class="logo-text">Elect<span class="accent">IQ</span></span></div>
+      <div class="nav-logo" style="margin-bottom:10px"><span class="logo-icon" aria-hidden="true">🗳️</span><span class="logo-text">Elect<span class="accent">IQ</span></span></div>
       <p>Empowering India's 968 million voters through civic education and transparent democracy.</p>
     </div>
     <div class="footer-links"><h4>Explore</h4>
@@ -270,8 +316,8 @@
       <a href="#cctv">Live Booths</a><a href="#quiz">Civic Quiz</a>
     </div>
     <div class="footer-links"><h4>Resources</h4>
-      <a href="https://eci.gov.in" target="_blank">Election Commission of India</a>
-      <a href="https://voters.eci.gov.in" target="_blank">Voter Registration Portal</a>
+      <a href="https://eci.gov.in" target="_blank" rel="noopener noreferrer">Election Commission of India</a>
+      <a href="https://voters.eci.gov.in" target="_blank" rel="noopener noreferrer">Voter Registration Portal</a>
       <a href="#assistant">AI Assistant</a>
     </div>
     <div class="footer-badge">
@@ -281,6 +327,24 @@
   <div class="footer-bottom"><p>© 2026 ElectIQ — Civic Education Platform. Built with ❤️ for Democracy &amp; Transparency.</p></div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,hi,bn,te,mr,ta,ur,gu,kn,or,ml,pa',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+  function resetLanguage() {
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
+    window.location.reload();
+  }
+</script>
+<script async src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script src="script.js" defer></script>
+<!-- Testing framework & Unit tests -->
+<script src="tests.js" defer></script>
 </body>
 </html>
